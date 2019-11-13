@@ -1,0 +1,3 @@
+= Colophon
+
+This is a sample book built with the `vshn/asciidoctor-pdf` docker image.

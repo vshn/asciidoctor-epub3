@@ -1,0 +1,22 @@
+:author: VSHN AG
+:revdate: {docdate}
+:revnumber: 1.2
+:email:  handbook@vshn.ch
+:copyright: CC-BY-SA 3.0
+:doctitle: VSHN Sample PDF Book
+:producer: VSHN AG
+:creator: VSHN AG
+:description: Sample document to create complex PDFs with VSHN style
+:keywords: VSHN, VSHNeer, work, systems, DevOps
+:lang: en
+
+
+// EPUB3 files must _always_ use a root
+// document that includes others, such as this one.
+
+[colophon]
+include::colophon.adoc[]
+
+include::introduction.adoc[]
+
+include::conclusion.adoc[]
