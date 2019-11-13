@@ -8,3 +8,19 @@ Block equation:
 ++++
 \frac{\partial^2 u}{\partial x^2}=\frac{1}{c^2} \frac{\partial^2 u}{\partial t^2}
 ++++
+
+A UML diagram:
+
+[plantuml, diagram-classes, png]     
+....
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+
+That's ((all)), folks!

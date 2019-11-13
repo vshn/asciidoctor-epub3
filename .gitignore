@@ -1,3 +1,6 @@
 .vscode
 *.epub
-
+*.svg
+*.png
+.asciidoctor
+?

@@ -3,11 +3,13 @@
 asciidoctor --backend=epub3 \
     --require=asciidoctor-epub3 \
     --require=asciidoctor-mathematical \
+    --require=asciidoctor-diagram \
     --attribute epub3-stylesdir=/theme \
     --attribute ebook-validate \
     --attribute doctype=book \
     --attribute mathematical-format=svg \
     --attribute mathematical-inline=true \
+    --attribute plantuml-config=/plantuml.config \
     --attribute stem=latexmath \
     --attribute hide-uri-scheme \
     --attribute experimental \
