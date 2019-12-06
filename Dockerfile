@@ -8,6 +8,7 @@ RUN apk add --no-cache \
     && gem install --no-document asciimath asciidoctor-mathematical asciidoctor-diagram
 
 COPY theme /theme
+COPY fonts /theme/fonts
 COPY plantuml.config /plantuml.config
 COPY generate-vshn-epub3.sh /usr/local/bin/generate-vshn-epub3
 

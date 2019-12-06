@@ -11,7 +11,7 @@ Block equation:
 
 A UML diagram:
 
-[plantuml, diagram-classes, png]     
+[plantuml, diagram-classes, png]
 ....
 class BlockProcessor
 class DiagramBlock

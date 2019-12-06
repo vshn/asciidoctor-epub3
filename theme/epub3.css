@@ -237,7 +237,7 @@ code.literal {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "M+ 1p", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-weight: 400;
   letter-spacing: -0.01em;
   /* NOTE Kindle doesn't allow the line-height to be less than the font size (refer to heading font sizes) */
@@ -272,7 +272,7 @@ figcaption, caption {
   color: #333332;
   /* NOTE iBooks will forcefully override font-family of text inside div, p and span elements when font other than Original is selected */
   /* NOTE iBooks honors Original font for prose text if declared in display-options.xml */
-  font-family: "Noto Serif", serif;
+  font-family: "Ubuntu", serif;
 }
 
 body p, li, dt, dd, footer {
@@ -281,7 +281,7 @@ body p, li, dt, dd, footer {
 
 code, kbd, pre {
   color: #191918;
-  font-family: "M+ 1mn", monospace;
+  font-family: "Ubuntu Mono", monospace;
   -webkit-hyphens: none; /* disable hyphenation where supported (e.g., iBooks) */
 }
 
@@ -372,7 +372,7 @@ div.callout-list ol li {
 
 i.conum {
   color: #468C54;
-  font-family: "M+ 1mn", monospace;
+  font-family: "Ubuntu Mono", monospace;
   font-style: normal;
 }
 
@@ -410,7 +410,7 @@ div.description-list div.description-list {
 
 h3.list-heading {
   font-size: 1em;
-  font-family: "Noto Serif", serif;
+  font-family: "Ubuntu", serif;
   font-weight: bold;
   line-height: 1.6;
   margin-top: 1em;

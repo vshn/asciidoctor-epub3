@@ -1,3 +1,5 @@
+@import url("epub3-fonts.css");
+
 /* Gitden & Namo default to 16px font-size; bump it to 20px (125%) */
 body.gitden-reader,
 body.namo-epub-library {
@@ -36,7 +38,7 @@ h1 :not(code), h2 :not(code), h3:not(.list-heading) :not(code), h4 :not(code), h
   /* !important required to override custom font setting in Kindle / Gitden / Namo */
   /* Gitden requires the extra weight of a parent selector; it also makes headings bold when custom font is specified */
   /* Kindle and Gitden require the override on heading child elements */
-  font-family: "M+ 1p", sans-serif !important;
+  font-family: "Ubuntu", sans-serif !important;
 }
 
 /* QUESTION what about nested elements inside code? */
@@ -44,7 +46,7 @@ body code, body kbd, body pre, pre :not(code) {
   /* !important required to override custom font setting in Kindle / Gitden / Namo */
   /* Gitden requires the extra weight of a parent selector */
   /* Kindle and Gitden require the override on pre child elements */
-  font-family: "M+ 1mn", monospace !important;
+  font-family: "Ubuntu Mono", monospace !important;
 }
 
 @media amzn-kf8 {
