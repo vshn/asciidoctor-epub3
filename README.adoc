@@ -12,22 +12,19 @@ Run the `make` command to build the image.
 
 Run the following command to build an EPUB3 using an Asciidoc file as a basis:
 
-`docker run --rm --tty --user "$(id -u)" --volume "${PWD}":/documents vshn/asciidoctor-epub3:1.2 file.adoc`
+`docker run --rm --tty --user "$(id -u)" --volume "${PWD}":/documents vshn/asciidoctor-epub3:1.3 file.adoc`
 
 Any parameters passed after the command line will be fed directly to Asciidoctor, for example
 
-`docker run --rm --tty --user "$(id -u)" --volume "${PWD}":/documents vshn/asciidoctor-epub3:1.2 file.adoc --destination-dir=./_archive`
+`docker run --rm --tty --user "$(id -u)" --volume "${PWD}":/documents vshn/asciidoctor-epub3:1.3 file.adoc --destination-dir=./_archive`
 
 == Default Attributes
 
 This project sets the following default attributes for the generation of the EPUB3 file:
 
 * doctype=book
+* epub3-stylesdir=/theme
 * ebook-validate
-* pdf-themesdir=/theme
-* pdf-theme=vshn
-* pdf-fontsdir=/fonts
-* pdf-page-size=A4
 * mathematical-format=svg
 * mathematical-inline=true
 * stem=latexmath
