@@ -1,11 +1,4 @@
-FROM asciidoctor/docker-asciidoctor
-
-RUN apk add --no-cache \
-    build-base \
-    libxml2-dev \
-    ruby-dev \
-    && gem update --no-document \
-    && gem install --no-document asciimath asciidoctor-mathematical asciidoctor-diagram
+FROM asciidoctor/docker-asciidoctor:1.1.0
 
 COPY theme /theme
 COPY fonts /theme/fonts
