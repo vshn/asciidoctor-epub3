@@ -5,7 +5,6 @@ asciidoctor --backend=epub3 \
     --require=asciidoctor-mathematical \
     --require=asciidoctor-diagram \
     --attribute epub3-stylesdir=/theme \
-    --attribute ebook-validate \
     --attribute doctype=book \
     --attribute mathematical-format=svg \
     --attribute mathematical-inline=true \

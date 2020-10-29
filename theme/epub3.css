@@ -12,12 +12,11 @@ footer, header, nav, section, summary {
 
 /* html and body declarations must be separate entries for some readers */
 html {
-  margin: 1em !important;
-  padding: 1em !important;
+  margin: 0 !important;
+  padding: 0 !important;
   /* set the em base (and relative em anchor) by setting the font-size on html */
   /* TODO set font-size > 100% except for Kindle */
   font-size: 100%;
-  -webkit-text-size-adjust: 100%;
 }
 
 /* don't set margin on body as that's how many readers frame reading area */
@@ -25,7 +24,7 @@ html {
 body {
   padding: 0 !important;
   /* add margin to ~ match Kindle's narrow setting */
-  /* don't use !important on margin as it breaks calibre */
+  /* don't use !important on margin as it interferes with reader overrides (Calibre and Kindle) */
   margin: 0;
   font-size: 100%;
   /* NOTE putting optimizeLegibility on the body slows down rendering considerably */
@@ -38,10 +37,10 @@ html body {
   background-color: #FFFFFF;
 }
 
-/* sets minimum margin permitted */
-/* @page not supported by Kindle or GitDen */
+/* @page only applies to EPUB2 readers; not supported by EPUB3 readers such as Kindle and Gitden */
 @page {
-  /* push the top & bottom margins down in Aldiko to emulate Kindle (Kindle uses ~ 10% of screen by default )*/
+  /* sets minimum margin permitted */
+  /* pushes the top & bottom margins down in Aldiko to emulate Kindle (Kindle uses ~ 10% of screen by default )*/
   margin: 1cm;
 }
 
@@ -81,8 +80,8 @@ b, strong {
 
 b.button {
   font-weight: normal;
-  text-shadow: 1px 0 0 #B3B3B1;
-  color: #191918;
+  text-shadow: 1px 0 0 #333332;
+  color: #101010;
   white-space: nowrap;
 }
 
@@ -138,11 +137,12 @@ kbd {
 
 img {
   border: 0;
+  max-width: 100%;
 }
 
 mark {
   background-color: #FFC14F;
-  color: #191918;
+  color: #101010;
 }
 
 small {
@@ -197,14 +197,36 @@ td, th {
   padding: 0;
 }
 
+/* We need to apply text-align to <p> too in order to override global text-align:justify */
+th.halign-left, td.halign-left, th.halign-left > p, td.halign-left > p {
+  text-align: left
+}
+
+th.halign-right, td.halign-right, th.halign-right > p, td.halign-right > p {
+  text-align: right
+}
+
+th.halign-center, td.halign-center, th.halign-center > p, td.halign-center > p {
+  text-align: center
+}
+
+th.valign-top, td.valign-top, th.valign-top > p, td.valign-top > p {
+  vertical-align: top
+}
+
+th.valign-bottom, td.valign-bottom, th.valign-bottom > p, td.valign-bottom > p {
+  vertical-align: bottom
+}
+
+th.valign-middle, td.valign-middle, th.valign-middle > p, td.valign-middle > p {
+  vertical-align: middle
+}
+
 body a:link {
-  color: #333332;
-  /* hack for font color in iBooks and Gitden (though Gitden would accept color !important too) */
-  -webkit-text-fill-color: #333332;
   /* Kindle requires the !important on text-decoration */
   /* In night mode, the only indicator of a link is the underline, so we need it or a background image */
   text-decoration: none !important;
-  border-bottom: 1px dashed #666665;
+  border-bottom: 1px dashed #333332;
   /* allow URLs to break anywhere if they don't fit on a line; but how do we know it's a URL? */
   /*
   word-break: break-all;
@@ -214,16 +236,10 @@ body a:link {
 body:first-of-type a:link {
   border-bottom: none;
   background-repeat: no-repeat;
-  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, #666665 5%, #666665 95%, rgba(255,255,255,0) 100%);
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 0%, #666665 5%, #666665 95%, rgba(255,255,255,0) 100%);
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #666665 5%, #666665 95%, rgba(255, 255, 255, 0) 100%);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #666665 5%, #666665 95%, rgba(255, 255, 255, 0) 100%);
   background-size: 100% 1px;
   background-position: 0 1.2em;
-}
-
-body a:visited {
-  color: #666665;
-  /* hack for font color in iBooks */
-  -webkit-text-fill-color: #666665;
 }
 
 code.literal {
@@ -237,7 +253,7 @@ code.literal {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "M+ 1p", sans-serif;
   font-weight: 400;
   letter-spacing: -0.01em;
   /* NOTE Kindle doesn't allow the line-height to be less than the font size (refer to heading font sizes) */
@@ -269,10 +285,9 @@ body p,
 ul, ol, li, dl, dt, dd, footer,
 div.verse .attribution, table.table th, table.table td,
 figcaption, caption {
-  color: #333332;
   /* NOTE iBooks will forcefully override font-family of text inside div, p and span elements when font other than Original is selected */
   /* NOTE iBooks honors Original font for prose text if declared in display-options.xml */
-  font-family: "Ubuntu", serif;
+  font-family: "Noto Serif", serif;
 }
 
 body p, li, dt, dd, footer {
@@ -280,8 +295,8 @@ body p, li, dt, dd, footer {
 }
 
 code, kbd, pre {
-  color: #191918;
-  font-family: "Ubuntu Mono", monospace;
+  color: #101010;
+  font-family: "M+ 1mn", monospace;
   -webkit-hyphens: none; /* disable hyphenation where supported (e.g., iBooks) */
 }
 
@@ -302,7 +317,7 @@ p.last::after {
   display: inline-block;
   font-family: "FontAwesome";
   font-size: 1em;
-  content: ""; /* i.e., </> */
+  content: "\f121"; /* i.e., </> */
   margin-left: 0.25em;
 }
 
@@ -356,6 +371,11 @@ dl dd {
   margin-top: 0.25em;
 }
 
+td.hdlist1 {
+  font-weight: bold;
+  padding-right: 0.625em;
+}
+
 div.callout-list {
   margin-top: 0.5em;
 }
@@ -372,7 +392,7 @@ div.callout-list ol li {
 
 i.conum {
   color: #468C54;
-  font-family: "Ubuntu Mono", monospace;
+  font-family: "M+ 1mn", monospace;
   font-style: normal;
 }
 
@@ -410,7 +430,7 @@ div.description-list div.description-list {
 
 h3.list-heading {
   font-size: 1em;
-  font-family: "Ubuntu", serif;
+  font-family: "Noto Serif", serif;
   font-weight: bold;
   line-height: 1.6;
   margin-top: 1em;
@@ -456,7 +476,7 @@ ul > li::before {
 
 ul > li::before {
   content: "\25AA"; /* small black square */
-  color: #666665;
+  color: #333332;
 }
 
 ul ul > li::before {
@@ -466,7 +486,7 @@ ul ul > li::before {
 
 ul ul ul > li::before {
   content: "\2022"; /* small black circle */
-  color: #666665;
+  color: #333332;
 }
 
 ul ul ul ul > li::before {
@@ -528,7 +548,6 @@ ul.references > li > span.principal {
 
 /* sized based on the major third modular scale (4:5, 16px, 24px) */
 h1, h2 {
-  color: #333332;
   font-size: 1.5em;
   word-spacing: -0.075em;
   margin-top: 1em; /* 1.5rem */
@@ -536,14 +555,13 @@ h1, h2 {
 }
 
 h3 {
-  color: #333332;
   font-size: 1.25em;
   margin-top: 0.84em; /* 1.05rem */
   margin-bottom: -0.5em; /* -0.625rem, 0.375rem to content */
 }
 
 h4 {
-  color: #4F4F4C;
+  color: #202020;
   font-weight: 200;
 
   font-size: 1.1em;
@@ -558,7 +576,7 @@ h4 {
 }
 
 h5 {
-  color: #666665;
+  color: #333332;
   /*
   font-size: 1em;
   text-transform: uppercase;
@@ -568,7 +586,7 @@ h5 {
 
   font-size: 0.9em;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: uppercase; /* not supported in Adobe Digital Editions */
   margin-top: 1.11em; /* 1rem */
   margin-bottom: -0.972em; /* -0.875rem */
 }
@@ -583,10 +601,12 @@ h5 code {
 
 /* Kindle strips (or unwraps) <header> tags, so we use an inner div to style */
 .chapter-header {
-  background-color: none;
   /* NOTE div must have at least 1px top padding for background to fill */
-  padding: 0.75em 1.5em 0.25em 1.5em; /* would like to use 1.5vh 1.5em */
+  /* would like to use vh units for top and bottom padding */
+  /*padding: 0.75em 1.5em 0.25em 1.5em;*/
+  padding: 0.25em 0;
   margin-bottom: 2.5em;
+  border-bottom: 1px solid #333332;
   /* TODO maybe what we need to get articles to start in left column
   -webkit-column-break-before: left;
   page-break-before: left;
@@ -599,16 +619,14 @@ h1.chapter-title {
   margin-top: 3.5em; /* 4.2rem - would like to use 9vh */
   margin-bottom: 0;
   padding-bottom: 0.8333em; /* 1.2rem */
-  color: #B3B3B1;
-  text-transform: uppercase;
+  color: #333332;
+  text-transform: uppercase; /* not supported in Adobe Digital Editions */
   word-spacing: -0.075em;
   letter-spacing: -0.01em;
-  border-bottom: 1px solid #DCDCDE;
 }
 
 h1.chapter-title .subtitle {
   font-weight: 400;
-  color: black;
   display: block;
   font-size: 1.5em;
   margin: 0 0 0 0.75em; /* would like to use 2vw */
@@ -625,7 +643,6 @@ h1.chapter-title b {
 }
 
 .chapter-header p.byline {
-  color: #DCDCDE;
   /* float left and height 0 takes this line out of the flow */
   float: left;
   height: 0;
@@ -651,26 +668,14 @@ h1.chapter-title b {
   width: 2em !important;
 }
 
-/* HACK: Solves a problem in the current implementation of asciidoctor-epub3 */
-p.byline {
-  display: none;
-}
-/* HACK: Solves a problem in the current implementation of asciidoctor-epub3 */
-
 div.abstract {
   margin: 5% 1.5em 2.5em 1.5em;
 }
 
 div.abstract > p {
-  color: #666665;
+  color: #333332;
   font-size: 1.05em; /* or 1.1em? */
   line-height: 1.75;
-}
-
-div.abstract > p a:link {
-  color: #666665;
-  /* hack for font color in iBooks */
-  -webkit-text-fill-color: #666665;
 }
 
 div.abstract > p:first-child::first-line {
@@ -734,7 +739,8 @@ figure.image {
 }
 
 figure.image img {
-  max-width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 figure.coalesce {
@@ -746,7 +752,7 @@ figcaption,
 caption {
   font-size: 0.9em;
   font-style: italic;
-  color: #666665;
+  color: #333332;
   letter-spacing: -0.01em;
   line-height: 1.4;
   text-align: left;
@@ -778,10 +784,10 @@ figure.listing > figcaption + pre {
 }
 
 aside.sidebar {
-  border: 1px solid #B3B3B1;
+  border: 1px solid #C8C8C8;
   padding: 0 1.5em;
   font-size: 0.9em;
-  background-color: #F2F2F2;
+  background-color: #E0E0E0;
   text-align: right; /* aligns heading to right */
   /*
   -webkit-box-shadow: 0px 1px 1px rgba(102, 102, 101, 0.15);
@@ -800,7 +806,7 @@ aside.sidebar.titled {
 }
 
 aside.sidebar > h2 {
-  /*text-transform: uppercase;*/ /* uppercase done manually to support Aldiko */
+  text-transform: uppercase; /* not supported in Adobe Digital Editions */
   font-size: 1em;
   /*
   font-weight: 700;
@@ -809,7 +815,7 @@ aside.sidebar > h2 {
   letter-spacing: 0;
   display: inline-block;
   white-space: nowrap; /* for some reason it's wrapping prematurely */
-  border: 1px solid #B3B3B1;
+  border: 1px solid #C8C8C8;
   padding: 1.5em .75em .5em .75em;
   margin: -1em 0.5em -0.25em 0.5em;
   background-color: #FFFFFF;
@@ -846,7 +852,7 @@ div[class~="blockquote"] {
 }
 
 blockquote > p {
-  color: #191918;
+  color: #101010;
   font-style: italic;
 
   /*
@@ -861,15 +867,9 @@ blockquote > p {
   line-height: 1.75;
 }
 
-/* hide explicit open quote for CSS3-enabled clients */
-blockquote span.open-quote:not(:empty) {
-  display: none;
-}
-
-/* NOTE if we mapped the font icon to "\201c", we could just style the .open-quote */
 blockquote > p:first-of-type::before {
   display: inline-block;
-  color: #666665;
+  color: #333332;
   text-shadow: 0 1px 2px rgba(102, 102, 101, 0.3);
 
   /* using serif quote from entypo */
@@ -901,20 +901,8 @@ blockquote footer {
 
 blockquote footer .context {
   font-size: 0.9em;
-  letter-spacing: -0.1em;
-  color: #666665;
-}
-
-/* Kindle requires text-align: center on surrounding div to align image to center */
-figure.image div.content {
-  text-align: center;
-}
-
-/* in the event the viewer adds display: block to the image */
-figure.image img {
-  /* max-width not supported in Kindle, need to use a media query to add */
-  /*max-width: 95%;*/
-  margin: 0 auto;
+  letter-spacing: -0.05em;
+  color: #333332;
 }
 
 pre {
@@ -922,18 +910,13 @@ pre {
   margin-top: 1em; /* 0.85rem */
   /*margin-top: 1.176em;*/ /* 1rem */
   white-space: pre-wrap;
-  /*word-break: break-all;*/ /* break at the end of the line, no matter what */
-  word-wrap: break-word; /* break in middle of long word if no other break opportunities are available */
+  overflow-wrap: break-word; /* break in middle of long word if no other break opportunities are available */
   font-size: 0.85em;
   line-height: 1.4; /* matches what Kindle uses and can't go less */
-  background-color: #F2F2F2;
-  padding: 0.5rem 0.75rem;
-  /*
-  border-top: 3px solid #DCDCDE;
-  */
-  /* QUESTION #B3B3B1? */
-  border-top: 1px solid #DCDCDE;
-  border-right: 1px solid #DCDCDE;
+  background-color: #E0E0E0;
+  padding: 0.6em 0.9em; /* this is supposed to be '0.5rem 0.75rem' but Sony Readers crash when see that (at least, PRS-350, PRS-505, PRS-T1) */
+  border-top: 1px solid #C8C8C8;
+  border-right: 1px solid #C8C8C8;
 }
 
 body:first-of-type pre {
@@ -991,28 +974,28 @@ aside[class~="admonition"] {
 }
 
 aside.note {
-  border-left-color: #B3B3B1;
-  background-color: #E1E1E1; /* 25% opacity of border */
+  border-left-color: #FFC14F;
+  background-color: #FFF0D4; /* 25% opacity of border */
 }
 
 aside.tip {
-  border-left-color: #57AD68;
-  background-color: #D4EAD9; /* 25% opacity of border */
+  border-left-color: #40403E;
+  background-color: #D0D0CF; /* 25% opacity of border */
 }
 
 aside.caution {
-  border-left-color: #666665;
-  background-color: #D8D8D8; /* 25% opacity of border */
+  border-left-color: #7F7F7D;
+  background-color: #DFDFDF; /* 25% opacity of border */
 }
 
 aside.warning {
   border-left-color: #C83737;
-  background-color: #F1CCCC; /* 25% opacity of border */
+  background-color: #F1CECE; /* 25% opacity of border */
 }
 
 aside.important {
-  border-left-color: #FFC14F;
-  background-color: #FFEFD2; /* 25% opacity of border */
+  border-left-color: #F2642A;
+  background-color: #FCD9CA; /* 25% opacity of border */
 }
 
 aside.admonition::before {
@@ -1024,7 +1007,7 @@ aside.admonition::before {
   text-align: center;
   margin-bottom: -0.25em;
   margin-left: -0.5em;
-  text-shadow: 0px 1px 2px rgba(102, 102, 101, 0.3);
+  text-shadow: 0px 1px 1px rgba(102, 102, 101, 0.15);
 }
 
 aside.admonition > div.content {
@@ -1045,56 +1028,53 @@ aside[class~="admonition"] > div[class~="content"] {
 }
 
 aside.note::before {
-  /*content: "\f0f4";*/ /* fa-coffee */
-  content: "\f040"; /* fa-pencil */
-  color: #B3B3B1; /* 179,179,177 */
+  content: "\f303"; /* fa-pencil-alt */
+  color: #FFC14F;
 }
 
 aside[class~="note"] > div[class~="content"] {
-  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0) 42.5%, #B3B3B1 45%, #B3B3B1 55%, rgba(255,255,255,0) 57.5%);
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 42.5%, #B3B3B1 45%, #B3B3B1 55%, rgba(255,255,255,0) 57.5%);
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 42.5%, #FFC14F 45%, #FFC14F 55%, rgba(255, 255, 255, 0) 57.5%);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 42.5%, #FFC14F 45%, #FFC14F 55%, rgba(255, 255, 255, 0) 57.5%);
 }
 
 aside.tip::before {
-  /*content: "\f069";*/ /* fa-asterisk */
-  /*content: "\f0d6";*/ /* fa-money */
-  content: "\f15a"; /* fa-bitcoin */
-  color: #57AD68; /* 87,173,104 */
+  content: "\f0eb"; /* fa-lightbulb */
+  color: #40403E;
 }
 
 aside[class~="tip"] > div[class~="content"] {
-  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0) 42.5%, #57AD68 45%, #57AD68 55%, rgba(255,255,255,0) 57.5%);
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 42.5%, #57AD68 45%, #57AD68 55%, rgba(255,255,255,0) 57.5%);
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 42.5%, #40403E 45%, #40403E 55%, rgba(255, 255, 255, 0) 57.5%);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 42.5%, #40403E 45%, #40403E 55%, rgba(255, 255, 255, 0) 57.5%);
 }
 
 aside.caution::before {
   content: "\f0c2"; /* fa-cloud */
-  color: #666665; /* 102,102,101 */ 
+  color: #7F7F7D;
 }
 
 aside[class~="caution"] > div[class~="content"] {
-  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0) 42.5%, #666665 45%, #666665 55%, rgba(255,255,255,0) 57.5%);
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 42.5%, #666665 45%, #666665 55%, rgba(255,255,255,0) 57.5%);
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 42.5%, #7F7F7D 45%, #7F7F7D 55%, rgba(255, 255, 255, 0) 57.5%);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 42.5%, #7F7F7D 45%, #7F7F7D 55%, rgba(255, 255, 255, 0) 57.5%);
 }
 
 aside.warning::before {
   content: "\f0e7"; /* fa-bolt */
-  color: #C83737; /* 200,55,55 */
+  color: #C83737;
 }
 
 aside[class~="warning"] > div[class~="content"] {
-  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0) 42.5%, #C83737 45%, #C83737 55%, rgba(255,255,255,0) 57.5%);
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 42.5%, #C83737 45%, #C83737 55%, rgba(255,255,255,0) 57.5%);
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 42.5%, #C83737 45%, #C83737 55%, rgba(255, 255, 255, 0) 57.5%);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 42.5%, #C83737 45%, #C83737 55%, rgba(255, 255, 255, 0) 57.5%);
 }
 
 aside.important::before {
   content: "\f12a"; /* fa-exclamation */
-  color: #FFC14F; /* 255,193,79 */
+  color: #F2642A;
 }
 
 aside[class~="important"] > div[class~="content"] {
-  background-image: -webkit-linear-gradient(left, rgba(255,255,255,0) 42.5%, #FFC14F 45%, #FFC14F 55%, rgba(255,255,255,0) 57.5%);
-  background-image: linear-gradient(to right, rgba(255,255,255,0) 42.5%, #FFC14F 45%, #FFC14F 55%, rgba(255,255,255,0) 57.5%);
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 42.5%, #F2642A 45%, #F2642A 55%, rgba(255, 255, 255, 0) 57.5%);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 42.5%, #F2642A 45%, #F2642A 55%, rgba(255, 255, 255, 0) 57.5%);
 }
 
 aside.admonition > h2 {
@@ -1129,8 +1109,6 @@ table.table th,
 table.table td {
   line-height: 1.4;
   padding: 0.5em 0.5em 1em 0.1em;
-  vertical-align: top;
-  text-align: left;
   -webkit-column-break-inside: avoid;
   page-break-inside: avoid;
 }
@@ -1140,65 +1118,66 @@ table.table th {
 }
 
 table.table thead th {
-  border-bottom: 1px solid #80807F;
+  border-bottom: 1px solid #707070;
 }
 
-table.table td > p {
+table.table td > p,
+table.table div.embed > * {
   margin-top: 0;
-  text-align: left;
 }
 
 /* REVIEW */
-table.table td > p + p {
+table.table td > p + p,
+table.table div.embed > * + * {
   margin-top: 1em;
 }
 
-table.table-framed {
+table.table-framed-all {
   border-width: 1px;
   border-style: solid;
-  border-color: #80807F;
+  border-color: #707070;
 }
 
 table.table-framed-topbot {
   border-width: 1px 0;
   border-style: solid;
-  border-color: #80807F;
+  border-color: #707070;
 }
 
 table.table-framed-sides {
   border-width: 0 1px;
   border-style: solid;
-  border-color: #80807F;
+  border-color: #707070;
 }
 
-table.table-grid th,
-table.table-grid td {
-  border-width: 0 1px 1px 0; 
+table.table-grid-all th,
+table.table-grid-all td {
+  border-width: 1px 1px 1px 1px;
   border-style: solid;
-  border-color: #80807F;
+  border-color: #707070;
 }
 
-table.table-grid thead tr > *:last-child {
+table.table-grid-all thead tr > *:last-child {
   border-right-width: 0;
 }
 
-table.table-grid tbody tr:last-child > th,
-table.table-grid tbody tr:last-child > td {
+table.table-grid-all tbody tr:last-child > th,
+table.table-grid-all tbody tr:last-child > td {
   border-bottom-width: 0;
 }
 
 table.table-grid-rows tbody th,
 table.table-grid-rows tbody td {
-  border-width: 1px 0 0 0; 
+  border-width: 1px 0 0 0;
   border-style: solid;
-  border-color: #80807F;
+  border-color: #707070;
 }
 
 table.table-grid-cols th,
 table.table-grid-cols td {
-  border-width: 0 1px 0 0; 
+  border-width: 0 1px 0 0;
   border-style: solid;
-  border-color: #80807F;
+  border-color: #707070;
 }
 
 table.table-grid-cols thead th:last-child {
@@ -1229,7 +1208,7 @@ hr.pagebreak + * {
 
 img.headshot {
   float: left;
-  border: 1px solid #80807F;
+  border: 1px solid #707070;
   padding: 1px;
   margin: 0.35em 1em 0.15em 0;
   height: 5em !important;
@@ -1267,6 +1246,11 @@ nav#toc ol {
   list-style-type: none;
 }
 
+/* Calibre doesn't hide <nav hidden="hidden"> for some reason */
+nav[hidden~="hidden"] {
+  display: none;
+}
+
 .icon {
   display: none;
 }
@@ -1277,9 +1261,11 @@ nav#toc ol {
   table.table th, table.table td, div.verse .attribution {
     font-family: serif;
   }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: sans-serif;
   }
+
   code, kbd, pre, i.conum {
     font-family: monospace;
   }
