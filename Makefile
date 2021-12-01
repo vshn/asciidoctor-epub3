@@ -1,7 +1,7 @@
 all: image
 
 image:
-	docker build -t vshn/asciidoctor-epub3:1.8.1 .
+	docker build -t vshn/asciidoctor-epub3:1.14.0 .
 
 test.epub:
-	docker run --rm --tty --user "$$(id -u)" --volume "$${PWD}":/documents vshn/asciidoctor-epub3:1.8.1 sample/test.adoc --destination-dir=.
+	docker run --rm --tty --user "$$(id -u)" --volume "$${PWD}":/documents vshn/asciidoctor-epub3:1.14.0 sample/test.adoc --destination-dir=.
