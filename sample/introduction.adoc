@@ -1,4 +1,4 @@
-= Introduction
+== Introduction
 
 A simple http://asciidoc.org[AsciiDoc] document.
 

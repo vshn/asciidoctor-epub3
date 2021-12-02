@@ -3,12 +3,16 @@
 asciidoctor --backend=epub3 \
     --require=asciidoctor-epub3 \
     --require=asciidoctor-mathematical \
-    --require=asciidoctor-diagram \
+    --require=asciidoctor-kroki \
     --attribute epub3-stylesdir=/theme \
     --attribute doctype=book \
     --attribute mathematical-format=svg \
     --attribute mathematical-inline=true \
-    --attribute plantuml-config=/plantuml.config \
+    --attribute kroki-server-url=https://vshn-kroki.appuioapp.ch \
+    --attribute kroki-fetch-diagram=true \
+    --attribute kroki-default-options=inline \
+    --attribute kroki-plantuml-include=/plantuml.config \
+    --attribute kroki-plantuml-include-paths=/ \
     --attribute stem=latexmath \
     --attribute hide-uri-scheme \
     --attribute experimental \
