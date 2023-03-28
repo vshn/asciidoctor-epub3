@@ -1,8 +1,6 @@
 = VSHN EPUB3 Generator based on Asciidoctor
 
-This project generates a Docker image to be used to generate EPUB3 books with a standard VSHN style and fonts.
-
-The image is available in https://hub.docker.com/r/vshn/asciidoctor-epub3[Docker Hub].
+This project generates a container image to be used to generate EPUB3 books with a standard VSHN style and fonts.
 
 == Build
 
@@ -12,11 +10,11 @@ Run the `make` command to build the image.
 
 Run the following command to build an EPUB3 using an Asciidoc file as a basis:
 
-`docker run --rm --tty --user "$(id -u)" --volume "${PWD}":/documents vshn/asciidoctor-epub3:1.14.1 file.adoc`
+`podman run --rm --volume "${PWD}":/documents ghcr.io/vshn/asciidoctor-epub3:1.14.1 file.adoc`
 
 Any parameters passed after the command line will be fed directly to Asciidoctor, for example
 
-`docker run --rm --tty --user "$(id -u)" --volume "${PWD}":/documents vshn/asciidoctor-epub3:1.14.1 file.adoc --destination-dir=./_archive`
+`podman run --rm --volume "${PWD}":/documents ghcr.io/vshn/asciidoctor-epub3:1.14.1 file.adoc --destination-dir=./_archive`
 
 == Default Attributes
 
