@@ -1,4 +1,4 @@
-FROM docker.io/asciidoctor/docker-asciidoctor:1.91.1
+FROM docker.io/asciidoctor/docker-asciidoctor:1.92.0
 
 COPY theme /theme
 COPY fonts /theme/fonts
